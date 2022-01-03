@@ -2,7 +2,7 @@ const router = require('express').Router();
 const User = require("../models/User");
 const bcrypt = require('bcrypt');
 
-//REGISTER 1
+//REGISTER
 router.post('/register', async (req, res) => {
     try {
         const salt = await bcrypt.genSalt(10);
