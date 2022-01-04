@@ -1,14 +1,17 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import './app.scss';
 
+import Topbar from "./components/topbar/Topbar";
+import Home from "./pages/home/Home";
+
 const App = () => {
-    const [ok, setOk] = useState(false);
+
 
     return (
-        <div className={"container " + (ok && "active")}>
-            <h1>ju</h1>
-            <button onClick={() => setOk(!ok)}>Change</button>
+        <div className="app">
+            <Topbar/>
+            <Home/>
         </div>
     );
 };
