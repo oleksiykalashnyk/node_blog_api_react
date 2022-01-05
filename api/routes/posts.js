@@ -1,4 +1,6 @@
+const fs = require('fs');
 const router = require('express').Router();
+
 const User = require("../models/User");
 const Post = require("../models/Post");
 
@@ -55,12 +57,28 @@ router.delete('/:id', async (req, res) => {
         !post && res.status(400).json("Wrong credentials!");
 
         if (post.username === req.body.username) {
+            if(post.photo) {
+                try {
+                    const path = `./images/${post.photo}`;
+                    fs.unlink(path, async (err) => {
+                        if (err) {
+                            console.error(err)
+                            return
+                        }
+                    })
+                } catch (err) {
+                    console.log(err)
+                }
+            }
+
+
             try {
                 await post.delete();
                 res.status(200).json("Post has been deleted...")
             } catch (err) {
                 res.status(500).json(err);
             }
+
         } else {
             res.status(401).json("You can delete only your post!");
         }
