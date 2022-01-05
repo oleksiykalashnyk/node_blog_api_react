@@ -59,3 +59,8 @@
   color: white;
   border-radius: 10px;
 }
+
+.loginButton:disabled {
+  background: red;
+  cursor: not-allowed;
+}
