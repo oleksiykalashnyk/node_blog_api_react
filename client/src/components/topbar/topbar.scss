@@ -41,6 +41,7 @@
   font-size: 18px;
   font-weight: 300;
   cursor: pointer;
+  color: #000;
 }
 
 .topRight {
@@ -60,4 +61,9 @@
   color: #666;
   cursor: pointer;
   margin-left: 15px;
+}
+.link {
+  color: #000;
+
+  text-decoration: none;
 }

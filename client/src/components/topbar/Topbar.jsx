@@ -1,8 +1,8 @@
 import React from 'react';
-
+import {Link} from "react-router-dom";
 import "./topbar.scss";
 
-const Topbar = () => {
+const TopBar = ({user}) => {
     return (
         <div className="top">
             <div className="topLeft">
@@ -13,19 +13,48 @@ const Topbar = () => {
             </div>
             <div className="topCenter">
                 <ul className="topList">
-                    <li className="topListItem">Home</li>
-                    <li className="topListItem">About</li>
+                    <li className="topListItem">
+                        <Link className="link" to="/">
+                            Home
+                        </Link>
+                    </li>
+                    <li className="topListItem">
+                        <Link className="link" to="/">
+                            About
+                        </Link>
+                    </li>
                     <li className="topListItem">Contact</li>
                     <li className="topListItem">Write</li>
-                    <li className="topListItem">LogOut</li>
+                    {user && <li className="topListItem">LogOut</li> }
                 </ul>
             </div>
             <div className="topRight">
-                <img src="https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt=""/>
+                {user ? (
+                    <Link className="link" to="/settings">
+                        <img
+                            className="topImg"
+                            src="https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+                            alt=""
+                        />
+                    </Link>
+                ) : (
+                    <ul className="topList">
+                        <li className="topListItem">
+                            <Link className="link" to="/login">
+                                LOGIN
+                            </Link>
+                        </li>
+                        <li className="topListItem">
+                            <Link className="link" to="/register">
+                                REGISTER
+                            </Link>
+                        </li>
+                    </ul>
+                )}
                 <i className="topSearchIcon fas fa-search"></i>
             </div>
         </div>
     );
 };
 
-export default Topbar;
+export default TopBar;
