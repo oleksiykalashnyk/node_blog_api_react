@@ -1,16 +1,12 @@
 @import "../../global";
 
-
 .post {
-  max-width: 385px;
-  width: 100%;
+  width: 385px;
   margin: 0px 25px 40px 25px;
-  display: flex;
-  flex-direction: column;
 }
 
 .postImg {
-  width: 385px;
+  width: 100%;
   height: 280px;
   object-fit: cover;
   border-radius: 7px;
@@ -22,56 +18,48 @@
   align-items: center;
 }
 
-.postCats {
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
-}
-
-.postTitle {
-  flex-basis: 100%;
-}
-
-.postCat > a {
-  font-family: "Varela Round", Arial, Helvetica, sans-serif;
-  font-weight: 400;
+.postCat {
+  font-family: "Varela Round", sans-serif;
   font-size: 11px;
   color: #be9656;
-  line-height: 19px;
+  line-height: 20px;
   margin-top: 15px;
   margin-right: 10px;
   cursor: pointer;
 }
 
-.postTitle > a{
-  text-decoration: none;
-  color: #15023a;
-  font-family: "Josefin Sans", Arial, Helvetica, sans-serif;
+.postTitle {
+  font-family: "Josefin Sans", sans-serif;
   font-size: 24px;
-  font-weight: 900;
+  font-weight: 700;
   margin-top: 15px;
   cursor: pointer;
+  flex-basis: 100%;
+
 }
 
 .postDate {
+  flex-basis: 100%;
   font-family: "Lora", serif;
   font-style: italic;
   font-size: 13px;
-  font-weight: 400;
-  color: #999999;
+  color: #999;
   margin-top: 15px;
 }
 
 .postDesc {
-  font-family: "Varela Round", Arial, Helvetica, sans-serif;
-  font-weight: 400;
+  font-family: "Varela Round", sans-serif;
   font-size: 14px;
+  color: #444;
   line-height: 24px;
-  color: #444444;
   margin-top: 15px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
+}
+
+.postCats {
+  display: flex;
 }

@@ -1,51 +1,49 @@
 import React from 'react';
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "./post.scss";
 
-const Post = ({image}) => {
+const Post = ({title, categories, createdAt, desc, photo, _id}) => {
+
+
+
     return (
         <div className="post">
-
-            <img
-                className="postImg"
-                src={image}
-                alt=""
-            />
+            {photo ? (
+                <img
+                    className="postImg"
+                    src={photo}
+                    alt="card"
+                />
+            ) : (
+                <img
+                    className="postImg"
+                    src="https://picsum.photos/500"
+                    alt="card"
+                />
+            )}
 
             <div className="postInfo">
-
                 <div className="postCats">
-                    <span className="postCat">
-                        <a className="link" href="/posts?cat=Music">
-                            Music
-                        </a>
-                    </span>
 
-                    <span className="postCat">
-                        <a className="link" href="/posts?cat=Music">
-                            Life
-                        </a>
-                    </span>
-
-                    <span className="postTitle">
-                        <a href="/post/abc" className="link">
-                            Lorem ipsum dolor sit amet
-                        </a>
-                    </span>
-
-                    <hr/>
-
-                    <span className="postDate">1 hour ago</span>
-
+                    {categories && categories.map(category => (
+                        <span className="postCat" key={category}>
+                            <Link className="link" to={`/posts?cat=${category}`}>
+                                {category}
+                            </Link>
+                        </span>
+                    ))}
                 </div>
 
-                <p className="postDesc">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda
-                    officia architecto deserunt deleniti? Labore ipsum aspernatur magnam
-                    fugiat, reprehenderit praesentium blanditiis quos cupiditate ratione
-                    atque, exercitationem quibusdam, reiciendis odio laboriosam?
-                </p>
+                    <span className="postTitle">
+                        <Link to={`/post/${_id}`} className="link">
+                            {title}
+                        </Link>
+                    </span>
+                    <hr/>
+                    <span className="postDate">{new Date(createdAt).toDateString()}</span>
+
+                <p className="postDesc">{desc}</p>
 
             </div>
 

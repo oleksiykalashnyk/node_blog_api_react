@@ -7,20 +7,26 @@ router.post('/', async (req, res) => {
     const user = await User.findOne({username: req.body.username});
     !user && res.status(400).json("Wrong credentials!");
 
-    const newPost = new Post(req.body);
+    if (user) {
+        const newPost = new Post(req.body);
 
-    try {
-        const savePost = await newPost.save();
-        res.status(200).json(savePost);
-    } catch (err) {
-        res.status(500).json(err)
+        try {
+            const savePost = await newPost.save();
+            res.status(200).json(savePost);
+        } catch (err) {
+            res.status(500).json(err)
+        }
     }
+
 });
 
 
 //UPDATE POST
 router.put('/:id', async (req, res) => {
     try {
+        const user = await User.findOne({username: req.body.username});
+        !user && res.status(400).json("Wrong credentials!");
+
         const post = await Post.findById(req.params.id);
         !post && res.status(400).json("Wrong credentials!");
 
