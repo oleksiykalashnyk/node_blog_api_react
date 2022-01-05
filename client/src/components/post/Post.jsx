@@ -5,14 +5,14 @@ import "./post.scss";
 
 const Post = ({title, categories, createdAt, desc, photo, _id}) => {
 
-
+    const publicFolder = "http://localhost:5000/images/";
 
     return (
         <div className="post">
             {photo ? (
                 <img
                     className="postImg"
-                    src={photo}
+                    src={publicFolder + photo}
                     alt="card"
                 />
             ) : (

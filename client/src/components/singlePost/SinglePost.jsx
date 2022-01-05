@@ -1,10 +1,16 @@
-import React, {useEffect, useState} from 'react';
-import { Link, useLocation } from "react-router-dom";
+import React, {useContext, useEffect, useState} from 'react';
+import {Link, useLocation} from "react-router-dom";
 
 import "./singlePost.scss";
 import axios from "axios";
 
+import {Context} from "../../contex/Contex";
+
 const SinglePost = () => {
+
+    const publicFolder = "http://localhost:5000/images/";
+
+    const {user} = useContext(Context);
 
     const location = useLocation();
     const patch = location.pathname.split("/")[2];
@@ -23,7 +29,7 @@ const SinglePost = () => {
             <div className="singlePostWrapper">
                 {post.photo ? (
                     <img
-                        src={post.photo}
+                        src={publicFolder + post.photo}
                         alt="post"
                         className="singlePostImage"
                     />
@@ -37,10 +43,13 @@ const SinglePost = () => {
 
                 <h1 className="singlePostTitle">
                     {post.title}
-                    <div className="singlePostEdit">
-                        <i className="singlePostIcon far fa-edit"></i>
-                        <i className="singlePostIcon far fa-trash-alt"></i>
-                    </div>
+                    {user?.username === post.username && (
+                        <div className="singlePostEdit">
+                            <i className="singlePostIcon far fa-edit"></i>
+                            <i className="singlePostIcon far fa-trash-alt"></i>
+                        </div>
+                    )}
+
                 </h1>
                 <div className="singlePostInfo">
                     <span>

@@ -16,18 +16,44 @@ const Write = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newPost = {
-            title
+            title,
+            desc,
+            username: user.username,
         }
-        const res = await axios.post
+        if (file) {
+            const data = new FormData();
+            const filename = Date.now() + file.name;
+            data.append("name", filename);
+            data.append("file", file);
+            newPost.photo = filename;
+
+            try {
+                await axios.post("/upload", data)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+
+        try {
+            const res = await axios.post("/posts", newPost);
+            window.location.replace("/post/" + res.data._id);
+        } catch (err) {
+            console.log(err)
+        }
+
     }
 
     return (
         <div className="write">
-            <img
-                className="writeImg"
-                src="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                alt=""
-            />
+
+            {file && (
+                <img
+                    className="writeImg"
+                    src={URL.createObjectURL(file)}
+                    alt=""
+                />
+            )}
+
             <form
                 className="writeForm"
                 onSubmit={handleSubmit}
@@ -36,12 +62,19 @@ const Write = () => {
                     <label htmlFor="fileInput">
                         <i className="writeIcon fas fa-plus"></i>
                     </label>
-                    <input id="fileInput" type="file" style={{display: "none"}}/>
+                    <input
+                        id="fileInput"
+                        type="file"
+                        style={{display: "none"}}
+                        onChange={(e) => setFile(e.target.files[0])}
+                    />
                     <input
                         className="writeInput"
                         placeholder="Title"
                         type="text"
+                        value={title}
                         autoFocus={true}
+                        onChange={e => setTitle(e.target.value)}
                     />
                 </div>
                 <div className="writeFormGroup">
@@ -49,7 +82,9 @@ const Write = () => {
                           className="writeInput writeText"
                           placeholder="Tell your story..."
                           type="text"
+                          value={desc}
                           autoFocus={true}
+                          onChange={e => setDesc(e.target.value)}
                       />
                 </div>
                 <button className="writeSubmit" type="submit">

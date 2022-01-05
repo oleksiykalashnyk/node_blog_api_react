@@ -19,7 +19,7 @@ const App = () => {
 
     return (
         <BrowserRouter>
-            <TopBar user={user}/>
+            <TopBar/>
             <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/posts" element={<Home/>}/>

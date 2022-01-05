@@ -3,9 +3,9 @@ import {Link} from "react-router-dom";
 import "./topbar.scss";
 import {Context} from "../../contex/Contex";
 
-const TopBar = ({user}) => {
+const TopBar = () => {
 
-    const {dispatch} = useContext(Context);
+    const {user, dispatch} = useContext(Context);
 
     const handleLogout = () => {
         dispatch({type: "LOGOUT"});
