@@ -10,6 +10,7 @@ const Sidebar = () => {
     useEffect(() => {
         const getAllCategories = async () => {
             const res = await axios.get('/categories')
+            !res && setCategories([])
             setCategories(res.data);
         }
         getAllCategories();
